@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TodoMaster - Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="dashboard-page">
+
+  <!-- ── TOP NAVIGATION BAR ── -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="logo-icon">✅</span>
+      <span class="logo-text">TodoMaster</span>
+    </div>
+
+    <!-- User profile section (top right) -->
+    <div class="nav-user">
+      <div class="user-info" id="userInfo">
+        <div class="avatar" id="userAvatar">U</div>
+        <span class="user-email" id="userEmail">Loading...</span>
+      </div>
+      <button class="btn btn-logout" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content">
+
+    <!-- Task Statistics -->
+    <div class="stats-bar">
+      <div class="stat-card">
+        <span class="stat-number" id="totalCount">0</span>
+        <span class="stat-label">Total Tasks</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="completedCount">0</span>
+        <span class="stat-label">Completed</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" id="pendingCount">0</span>
+        <span class="stat-label">Pending</span>
+      </div>
+    </div>
+
+    <!-- Add Task Section -->
+    <div class="add-task-card">
+      <h2>Add New Task</h2>
+      <div class="add-task-form">
+        <input type="text" id="taskInput" placeholder="What do you need to do?" class="task-input"
+          onkeypress="if(event.key==='Enter') addTask()" />
+        <input type="date" id="dueDateInput" class="date-input" title="Due Date (optional)" />
+        <button class="btn btn-add" onclick="addTask()">+ Add Task</button>
+      </div>
+      <div class="message-box" id="addMessageBox" style="display:none;"></div>
+    </div>
+
+    <!-- Task List Section -->
+    <div class="task-list-card">
+      <div class="task-list-header">
+        <h2>My Tasks</h2>
+        <div class="filter-tabs">
+          <button class="filter-btn active" onclick="filterTasks('all', this)">All</button>
+          <button class="filter-btn" onclick="filterTasks('uncompleted', this)">Pending</button>
+          <button class="filter-btn" onclick="filterTasks('completed', this)">Completed</button>
+        </div>
+      </div>
+
+      <!-- Loading state -->
+      <div id="loadingState" class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading your tasks...</p>
+      </div>
+
+      <!-- Empty state -->
+      <div id="emptyState" class="empty-state" style="display:none;">
+        <div class="empty-icon">📝</div>
+        <p>No tasks yet. Add your first task above!</p>
+      </div>
+
+      <!-- Task list -->
+      <ul class="task-list" id="taskList"></ul>
+    </div>
+
+  </main>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="firebase.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+
+</html>
